@@ -7,6 +7,7 @@ public class UserManagement {
     private JPasswordField passwordField1;
     private JButton Button_Login;
     private JTextField textField1;
+    private JButton Button_Sign;
 
     public void addview() {
         JFrame frame = new JFrame("登录界面");
