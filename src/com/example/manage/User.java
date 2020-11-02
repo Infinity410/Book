@@ -2,20 +2,13 @@ package com.example.manage;
 
 
 public class User {
-    private int serialNo;
     private String ID;
-    private String no;
-    private String datel;
+    private String password;
+    private String name;
+    private String unit;
     private int type;
-    private String operator;
-
-    public int getSerialNo() {
-        return serialNo;
-    }
-
-    public void setSerialNo(int serialNo) {
-        this.serialNo = serialNo;
-    }
+    private String telephone;
+    private int count;
 
     public String getID() {
         return ID;
@@ -25,20 +18,28 @@ public class User {
         this.ID = ID;
     }
 
-    public String getNo() {
-        return no;
+    public String getPassword() {
+        return password;
     }
 
-    public void setNo(String no) {
-        this.no = no;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getDatel() {
-        return datel;
+    public String getName() {
+        return name;
     }
 
-    public void setDatel(String datel) {
-        this.datel = datel;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     public int getType() {
@@ -49,24 +50,33 @@ public class User {
         this.type = type;
     }
 
-    public String getOperator() {
-        return operator;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public void setOperator(String operator) {
-        this.operator = operator;
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "serialNo=" + serialNo +
-                ", ID='" + ID + '\'' +
-                ", no='" + no + '\'' +
-                ", datel=" + datel +
+                "ID='" + ID + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", unit='" + unit + '\'' +
                 ", type=" + type +
-                ", operator='" + operator + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", count=" + count +
                 '}';
     }
-
 }
