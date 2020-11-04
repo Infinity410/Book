@@ -1,5 +1,5 @@
 package com.example.manage;
-
+import java.io.*;
 
 public class User {
     private String ID;
@@ -9,6 +9,14 @@ public class User {
     private int type;
     private String telephone;
     private int count;
+
+    public void User(){
+        ID="";password="";name="";unit="";type=0;telephone="";count=0;
+    }
+
+    public void User(String id,String pass,String na,String un,int ty,String tele,int co){
+        ID=id;password=pass;name=na;unit=un;type=ty;telephone=tele;count=co;
+    }
 
     public String getID() {
         return ID;
@@ -66,7 +74,37 @@ public class User {
         this.count = count;
 
     }
-
+    public void filein(){
+        try {
+            File bookmsg = new File("User.txt");
+            if (!bookmsg.exists()) {
+                try {
+                    boolean createResult = bookmsg.createNewFile();
+                    if (createResult) {
+                        System.out.println("文件创建成功！");
+                    } else {
+                        System.out.println("文件创建失败！");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            FileOutputStream fos = new FileOutputStream(bookmsg);
+            ObjectOutputStream writein = new ObjectOutputStream(fos);
+            writein.writeObject(this.ID);
+            writein.writeObject(this.password);
+            writein.writeObject(this.name);
+            writein.writeObject(this.unit);
+            writein.writeObject(this.type);
+            writein.writeObject(this.telephone);
+            writein.writeObject(this.count);
+            fos.close();
+        }catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public String toString() {
         return "User{" +
