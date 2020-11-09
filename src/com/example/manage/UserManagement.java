@@ -48,31 +48,34 @@ public class UserManagement extends JFrame{
         frame.pack();
         frame.setLayout(null);
 
+        JLabel title = new JLabel("欢迎使用图书管理系统");
+        title.setBounds(190, 10, 150, 25);
+        frame.add(title);
         JLabel nameStr = new JLabel("账号:");
-        nameStr.setBounds(150, 0, 100, 25);
+        nameStr.setBounds(150, 50, 100, 25);
         frame.add(nameStr);
 
         JLabel passwordStr = new JLabel("密码:");
-        passwordStr.setBounds(150, 50, 100, 25);
+        passwordStr.setBounds(150, 100, 100, 25);
         frame.add(passwordStr);
 
         JTextField userID = new JTextField();
-        userID.setBounds(200, 0, 150, 25);
+        userID.setBounds(200, 50, 150, 25);
         frame.add(userID);
 
         JPasswordField password = new JPasswordField();
-        password.setBounds(200, 50, 150, 25);
+        password.setBounds(200, 100, 150, 25);
         frame.add(password);
 
         JButton Button_Login = new JButton("登录");
-        Button_Login.setBounds(175, 100, 70, 25);
+        Button_Login.setBounds(175, 150, 70, 25);
         frame.add(Button_Login);
 
         JButton Button_Sign = new JButton("注册");
-        Button_Sign.setBounds(275, 100, 70, 25);
+        Button_Sign.setBounds(275, 150, 70, 25);
         frame.add(Button_Sign);
 
-        frame.setSize(500, 200);
+        frame.setSize(500, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
