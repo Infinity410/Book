@@ -6,11 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UserManagement extends JFrame{
-    private JPanel panel1;
-    private JPasswordField passwordField1;
-    private JButton Button_Login;
-    private JTextField textField1;
-    private JButton Button_Sign;
+
     private int count = 0;
     private String ID;
     private String password1;
@@ -102,9 +98,9 @@ public class UserManagement extends JFrame{
                             //弹出账号或密码错误的窗口
                             JOptionPane.showMessageDialog(null, "账号或密码错误", "账号或密码错误", JOptionPane.WARNING_MESSAGE);
                             //清除密码框中的信息
-                            passwordField1.setText("");
+                            password.setText("");
                             //清除账号框中的信息
-                            textField1.setText("");
+                            userID.setText("");
                         }
                     }else{
                         JOptionPane.showMessageDialog(null, "账号或密码错误超过上限", "账号或密码错误超过上限", JOptionPane.WARNING_MESSAGE);
