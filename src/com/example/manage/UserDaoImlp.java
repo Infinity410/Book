@@ -1,5 +1,6 @@
 package com.example.manage;
 
+import javax.swing.*;
 import java.io.*;
 
 public class UserDaoImlp implements UserDao{
@@ -31,15 +32,10 @@ public class UserDaoImlp implements UserDao{
     @Override
     public boolean isLoginUser(String name, String password) {
         boolean flag = false;
-        int count=0;
         //初始化BufferedReader
         BufferedReader br = null;
         if(!name.equals("") && !password.equals("")){
             try {
-                if(count==3){
-                    System.out.println("登录已达3次！");
-                    flag = false;
-                }
                 br = new BufferedReader(new FileReader(file));
                 String str = null;
                 //循环判断
@@ -50,7 +46,6 @@ public class UserDaoImlp implements UserDao{
                         break;
                     }
                 }
-                count++;
 
             } catch (FileNotFoundException e) {
                 System.out.println("登录异常："+e.getMessage());
@@ -64,6 +59,7 @@ public class UserDaoImlp implements UserDao{
                 }
             }
         }else{
+
             System.out.println("用户名和密码不能为空");
         }
         return flag;
