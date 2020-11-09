@@ -74,7 +74,7 @@ public class User {
         this.count = count;
 
     }
-    public void filein(){
+    /*public void filein(){
         try {
             File bookmsg = new File("User.txt");
             if (!bookmsg.exists()) {
@@ -104,7 +104,7 @@ public class User {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
     @Override
     public String toString() {
         return "User{" +

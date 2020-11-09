@@ -11,7 +11,7 @@ public class UserDaoImlp implements UserDao{
         if(user!=null){
             try{
                 bw = new BufferedWriter(new FileWriter(file,true));
-                bw.write(user.getName()+"=>"+user.getPassword());
+                bw.write(user.getID()+"=>"+user.getPassword()+"=>"+user.getType()+"=>"+user.getName()+"=>"+user.getUnit()+"=>"+user.getTelephone()+"=>"+user.getCount());
                 bw.newLine();
                 bw.flush();
             }catch (IOException e) {
