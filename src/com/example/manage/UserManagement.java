@@ -8,16 +8,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-public class UserManagement extends JFrame{
+public class UserManagement extends JFrame {
 
     private int count = 0;
     private String ID;
     private String password1;
     private Object UserDaoImlp;
+    private List<User> users;
+    private static final File file = new File("User.txt");
 
     public UserManagement() {
         init();
+        users = new ArrayList<>();
 //        JFrame frame = new JFrame("登录界面");
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        frame.pack();
@@ -38,12 +45,46 @@ public class UserManagement extends JFrame{
 //        user1.setCount(10);
 //
 //        userDaoImlp.registerUser(user1);
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(file));
+            String str = null;
+            //循环判断
+            while ((str = br.readLine()) != null) {
+                String[] data = str.split("=>");
+                User user1 = new User();
+                user1.setID(data[0]);
+                user1.setPassword(data[1]);
+                int type = Integer.parseInt(data[2]);
+                user1.setType(type);
+                user1.setName(data[3]);
+                user1.setUnit(data[4]);
+                user1.setTelephone(data[5]);
+                int CountBook = Integer.parseInt(data[6]);
+                user1.setCount(CountBook);
+                users.add(user1);
+                //System.out.println(user1);
+            }
 
+        } catch (FileNotFoundException e) {
+            System.out.println("文件读入异常：" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("文件读入异常：" + e.getMessage());
+        } finally {
+            try {
+                br.close();
+            } catch (IOException e) {
+                System.out.println("关闭BufferedReader输入流异常：" + e.getMessage());
+            }
+        }
+        for (Iterator<User> iterator = users.iterator(); iterator.hasNext(); ) {
+            System.out.println(iterator.next());
+        }
 
     }
 
     public void init() {
-        UIManager.put("RootPane.setupButtonVisible",false);
+        UIManager.put("RootPane.setupButtonVisible", false);
         try {
             BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.osLookAndFeelDecorated;
             org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
@@ -57,7 +98,7 @@ public class UserManagement extends JFrame{
             JLabel title = new JLabel("欢迎使用图书管理系统");
             Font font = new Font("宋体", Font.BOLD, 25);
             title.setFont(font);
-            title.setBounds(135, 10, 500, 25);
+            title.setBounds(125, 10, 500, 25);
             frame.add(title);
 
             JLabel nameStr = new JLabel("账号:");
@@ -128,8 +169,8 @@ public class UserManagement extends JFrame{
                         //弹出登录成功的窗口
                         JOptionPane.showMessageDialog(null, "登陆成功", "登陆成功", JOptionPane.NO_OPTION);
                         //点击确定后会跳转到主窗口
-//                        frame.setVisible(false);
-//                        init();
+                        frame.setVisible(false);
+                        menu();
                     }
                 }
             });
@@ -142,13 +183,56 @@ public class UserManagement extends JFrame{
                     Sign_Up_GUI sign_up_gui = new Sign_Up_GUI();
                 }
             });
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public void menu() {
+        UIManager.put("RootPane.setupButtonVisible", false);
+        try {
+            BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.osLookAndFeelDecorated;
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+
+            JFrame frame = new JFrame("菜单界面");
+            UIManager.put("swing.boldMetal", Boolean.FALSE);
+            frame.setSize(500, 200);
+            frame.pack();
+            frame.setLayout(null);
+
+            JLabel title = new JLabel("欢迎使用图书管理系统");
+            Font font = new Font("宋体", Font.BOLD, 25);
+            title.setFont(font);
+            title.setBounds(125, 10, 500, 25);
+            frame.add(title);
+
+            JButton Button_UserManage = new JButton("用户管理");
+            Button_UserManage.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.green));
+            Button_UserManage.setForeground(Color.white);
+            Button_UserManage.setBounds(170, 50, 150, 25);
+            frame.add(Button_UserManage);
+
+            JButton Button_BookManage = new JButton("图书管理");
+            Button_BookManage.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.green));
+            Button_BookManage.setForeground(Color.white);
+            Button_BookManage.setBounds(170, 100, 150, 25);
+            frame.add(Button_BookManage);
+
+            JButton Button_BookLiuTongManage = new JButton("图书管理");
+            Button_BookLiuTongManage.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.green));
+            Button_BookLiuTongManage.setForeground(Color.white);
+            Button_BookLiuTongManage.setBounds(170, 150, 150, 25);
+            frame.add(Button_BookLiuTongManage);
+
+            frame.setSize(500, 300);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
-
+    }
 }
 
