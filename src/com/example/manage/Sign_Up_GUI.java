@@ -60,35 +60,35 @@ public class Sign_Up_GUI {
             fr.add(newCount);
 
             JTextField newUserID = new JTextField();
-            newUserID.setBounds(200, 50, 150, 25);
+            newUserID.setBounds(240, 50, 150, 25);
             fr.add(newUserID);
 
             JTextField newUserPassword = new JTextField();
-            newUserPassword.setBounds(200, 100, 150, 25);
+            newUserPassword.setBounds(240, 100, 150, 25);
             fr.add(newUserPassword);
 
             JTextField newUserPassword1 = new JTextField();
-            newUserPassword1.setBounds(200, 150, 150, 25);
+            newUserPassword1.setBounds(240, 150, 150, 25);
             fr.add(newUserPassword1);
 
             JTextField newUserName = new JTextField();
-            newUserName.setBounds(200, 200, 150, 25);
+            newUserName.setBounds(240, 200, 150, 25);
             fr.add(newUserName);
 
             JTextField newUserUnit = new JTextField();
-            newUserUnit.setBounds(200, 250, 150, 25);
+            newUserUnit.setBounds(240, 250, 150, 25);
             fr.add(newUserUnit);
 
             JTextField newUserType = new JTextField();
-            newUserType.setBounds(200, 300, 150, 25);
+            newUserType.setBounds(240, 300, 150, 25);
             fr.add(newUserType);
 
             JTextField newUserTelephone = new JTextField();
-            newUserTelephone.setBounds(200, 350, 150, 25);
+            newUserTelephone.setBounds(240, 350, 150, 25);
             fr.add(newUserTelephone);
 
             JTextField newUserCount = new JTextField();
-            newUserCount.setBounds(200, 400, 150, 25);
+            newUserCount.setBounds(240, 400, 150, 25);
             fr.add(newUserCount);
 
             JButton Button_Comfirm = new JButton("确定");
