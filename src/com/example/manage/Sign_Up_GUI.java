@@ -43,7 +43,7 @@ public class Sign_Up_GUI {
             newName.setBounds(150, 200, 100, 25);
             fr.add(newName);
 
-            JLabel newUnit = new JLabel("年级:");
+            JLabel newUnit = new JLabel("单位:");
             newUnit.setBounds(150, 250, 100, 25);
             fr.add(newUnit);
 
