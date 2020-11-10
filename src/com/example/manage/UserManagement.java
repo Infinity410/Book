@@ -14,6 +14,7 @@ public class UserManagement extends JFrame{
     private int count = 0;
     private String ID;
     private String password1;
+    private Object UserDaoImlp;
 
     public UserManagement() {
         init();
@@ -127,17 +128,18 @@ public class UserManagement extends JFrame{
                         //弹出登录成功的窗口
                         JOptionPane.showMessageDialog(null, "登陆成功", "登陆成功", JOptionPane.NO_OPTION);
                         //点击确定后会跳转到主窗口
-                        //frame.setVisible(false);
+//                        frame.setVisible(false);
+//                        init();
                     }
                 }
             });
             Button_Sign.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    UserDaoImlp userDaoImlp = new UserDaoImlp();
-                    User u1 = new User();
-                    userDaoImlp.registerUser(u1);
-
+//                    UserDaoImlp = new UserDaoImlp();
+//                    User u1 = new User();
+//                    userDaoImlp.registerUser(u1);
+                    Sign_Up_GUI sign_up_gui = new Sign_Up_GUI();
                 }
             });
         }catch (Exception e) {
