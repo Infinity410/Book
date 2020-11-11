@@ -134,6 +134,7 @@ public class Sign_Up_GUI {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     fr.dispose();
+                    UserManagement management = new UserManagement();
                 }
             });
         }catch(Exception e) {

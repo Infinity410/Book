@@ -180,6 +180,7 @@ public class UserManagement extends JFrame {
 //                    UserDaoImlp = new UserDaoImlp();
 //                    User u1 = new User();
 //                    userDaoImlp.registerUser(u1);
+                    frame.setVisible(false);
                     Sign_Up_GUI sign_up_gui = new Sign_Up_GUI();
                 }
             });
@@ -234,6 +235,14 @@ public class UserManagement extends JFrame {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
+
+            Button_MenuExit.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.dispose();
+                    init();
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
