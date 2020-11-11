@@ -124,6 +124,7 @@ public class Sign_Up_GUI {
                         zxc.registerUser(nUser);
                         JOptionPane.showMessageDialog(null, "注册成功", "注册成功", JOptionPane.NO_OPTION);
                         fr.dispose();
+                        UserManagement management = new UserManagement();
                     }
                     else{
                         JOptionPane.showMessageDialog(null, "两次密码不一致", "密码不一致", JOptionPane.WARNING_MESSAGE);
