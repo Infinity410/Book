@@ -224,6 +224,12 @@ public class UserManagement extends JFrame {
             Button_BookLiuTongManage.setBounds(170, 150, 150, 25);
             frame.add(Button_BookLiuTongManage);
 
+            JButton Button_MenuExit = new JButton("退出");
+            Button_MenuExit.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.green));
+            Button_MenuExit.setForeground(Color.white);
+            Button_MenuExit.setBounds(170, 200, 150, 25);
+            frame.add(Button_MenuExit);
+
             frame.setSize(500, 300);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setLocationRelativeTo(null);
