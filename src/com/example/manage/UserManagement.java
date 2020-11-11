@@ -21,6 +21,7 @@ public class UserManagement extends JFrame {
     private Object UserDaoImlp;
     private List<User> users;
     private static final File file = new File("User.txt");
+    private int usertype;
 
     public UserManagement() {
         init();
@@ -170,7 +171,8 @@ public class UserManagement extends JFrame {
                         JOptionPane.showMessageDialog(null, "登陆成功", "登陆成功", JOptionPane.NO_OPTION);
                         //点击确定后会跳转到主窗口
                         frame.setVisible(false);
-                        menu();
+                        usertype = userDaoImlp.getType();
+                        menu(usertype);
                     }
                 }
             });
@@ -189,7 +191,7 @@ public class UserManagement extends JFrame {
         }
     }
 
-    public void menu() {
+    public void menu(int usertype1) {
         UIManager.put("RootPane.setupButtonVisible", false);
         try {
             BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.osLookAndFeelDecorated;
@@ -217,13 +219,21 @@ public class UserManagement extends JFrame {
             Button_BookManage.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.green));
             Button_BookManage.setForeground(Color.white);
             Button_BookManage.setBounds(170, 100, 150, 25);
-            frame.add(Button_BookManage);
+            if(usertype1 == 3){
+                Button_BookManage.setVisible(false);
+            }else {
+                frame.add(Button_BookManage);
+            }
 
             JButton Button_BookLiuTongManage = new JButton("图书流通管理");
             Button_BookLiuTongManage.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.green));
             Button_BookLiuTongManage.setForeground(Color.white);
             Button_BookLiuTongManage.setBounds(170, 150, 150, 25);
-            frame.add(Button_BookLiuTongManage);
+            if(usertype1==2){
+                frame.add(Button_BookLiuTongManage);
+            }else{
+                Button_BookLiuTongManage.setVisible(false);
+            }
 
             JButton Button_MenuExit = new JButton("退出");
             Button_MenuExit.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.green));
@@ -243,6 +253,7 @@ public class UserManagement extends JFrame {
                     init();
                 }
             });
+
         } catch (Exception e) {
             e.printStackTrace();
         }

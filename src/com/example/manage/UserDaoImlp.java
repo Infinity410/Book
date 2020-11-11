@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.io.*;
 
 public class UserDaoImlp implements UserDao{
+    private int type;
     private static final File file = new File("User.txt");
     @Override
     public void registerUser(User user) {
@@ -43,7 +44,9 @@ public class UserDaoImlp implements UserDao{
                     String[] data = str.split("=>");
                     if(data[0].equals(name)&&data[1].equals(password)){
                         flag = true;
+                        type = Integer.parseInt(data[2]);
                         break;
+
                     }
                 }
 
@@ -63,5 +66,9 @@ public class UserDaoImlp implements UserDao{
             System.out.println("用户名和密码不能为空");
         }
         return flag;
+    }
+
+    public int getType() {
+        return type;
     }
 }
