@@ -219,7 +219,7 @@ public class UserManagement extends JFrame {
             Button_BookManage.setBounds(170, 100, 150, 25);
             frame.add(Button_BookManage);
 
-            JButton Button_BookLiuTongManage = new JButton("图书管理");
+            JButton Button_BookLiuTongManage = new JButton("图书流通管理");
             Button_BookLiuTongManage.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.green));
             Button_BookLiuTongManage.setForeground(Color.white);
             Button_BookLiuTongManage.setBounds(170, 150, 150, 25);
