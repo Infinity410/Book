@@ -257,7 +257,20 @@ public class UserManagement extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public void input(){
 
+    }
+    public void update(){
+
+    }
+    public void delete(){
+
+    }
+    public void query(){
+
+    }
+    public void changePassword(){
 
     }
 }
