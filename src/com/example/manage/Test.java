@@ -12,6 +12,7 @@ public class Test {
         //u1.filein();
         System.out.println(u1);
         UserManagement management = new UserManagement();
+        management.init();
 
 
 

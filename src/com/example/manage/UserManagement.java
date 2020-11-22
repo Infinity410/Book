@@ -1,9 +1,10 @@
 package com.example.manage;
 
+import com.example.manage.book.BookManagement;
 import org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper;
 import org.jb2011.lnf.beautyeye.ch3_button.BEButtonUI;
 import org.jb2011.lnf.beautyeye.ch6_textcoms.BETextAreaUI;
-
+import com.example.manage.circulation.CirculationManagement;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,12 +20,13 @@ public class UserManagement extends JFrame {
     private String ID;
     private String password1;
     private Object UserDaoImlp;
+    private String operator;
     private List<User> users;
     private static final File file = new File("User.txt");
     private int usertype;
 
     public UserManagement() {
-        init();
+        //init();
         users = new ArrayList<>();
 //        JFrame frame = new JFrame("登录界面");
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,6 +85,47 @@ public class UserManagement extends JFrame {
         }
 
     }
+
+    public UserManagement(String operator1){
+        users = new ArrayList<>();
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(file));
+            String str = null;
+            //循环判断
+            while ((str = br.readLine()) != null) {
+                String[] data = str.split("=>");
+                User user1 = new User();
+                user1.setID(data[0]);
+                user1.setPassword(data[1]);
+                int type = Integer.parseInt(data[2]);
+                user1.setType(type);
+                user1.setName(data[3]);
+                user1.setUnit(data[4]);
+                user1.setTelephone(data[5]);
+                int CountBook = Integer.parseInt(data[6]);
+                user1.setCount(CountBook);
+                users.add(user1);
+                //System.out.println(user1);
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("文件读入异常：" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("文件读入异常：" + e.getMessage());
+        } finally {
+            try {
+                br.close();
+            } catch (IOException e) {
+                System.out.println("关闭BufferedReader输入流异常：" + e.getMessage());
+            }
+        }
+        for (Iterator<User> iterator = users.iterator(); iterator.hasNext(); ) {
+            System.out.println(iterator.next());
+        }
+        setOperator(operator1);
+    }
+
 
     public void init() {
         UIManager.put("RootPane.setupButtonVisible", false);
@@ -143,6 +186,7 @@ public class UserManagement extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     ID = userID.getText();
                     System.out.println(ID);
+                    setOperator(ID);
                     password1 = new String(password.getPassword());
                     System.out.println(password1);
                     boolean flag = userDaoImlp.isLoginUser(ID, password1);
@@ -189,6 +233,14 @@ public class UserManagement extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
     }
 
     public void menu(int usertype1) {
@@ -251,6 +303,22 @@ public class UserManagement extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     frame.dispose();
                     init();
+                }
+            });
+            Button_BookManage.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.dispose();
+                    BookManagement bookManagement = new BookManagement();
+                    bookManagement.init(usertype1);
+                }
+            });
+            Button_BookLiuTongManage.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.dispose();
+                    CirculationManagement circulationManagement = new CirculationManagement();
+                    circulationManagement.init(usertype1,operator);
                 }
             });
 
