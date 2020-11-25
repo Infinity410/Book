@@ -3,7 +3,7 @@ package com.example.manage.circulation;
 public class Circulation {
     private int serialNo;
     private String id;
-    private int no;
+    private String no;
     private String datel;
     private int type;
     private String operator;
@@ -24,11 +24,11 @@ public class Circulation {
         this.id = id;
     }
 
-    public int getNo() {
+    public String getNo() {
         return no;
     }
 
-    public void setNo(int no) {
+    public void setNo(String no) {
         this.no = no;
     }
 

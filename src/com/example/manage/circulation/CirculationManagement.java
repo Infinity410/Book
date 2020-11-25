@@ -44,18 +44,39 @@ public class CirculationManagement {
             Button_Lend.setForeground(Color.white);
             Button_Lend.setBounds(170, 50, 150, 25);
             frame.add(Button_Lend);
+            Button_Lend.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    lendBook();
+                    frame.dispose();
+                }
+            });
 
             JButton Button_Return = new JButton("还书处理");
             Button_Return.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.green));
             Button_Return.setForeground(Color.white);
             Button_Return.setBounds(170, 100, 150, 25);
             frame.add(Button_Return);
+            Button_Return.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    returnBook();
+                    frame.dispose();
+                }
+            });
 
             JButton Button_Query = new JButton("借阅信息查询");
             Button_Query.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.green));
             Button_Query.setForeground(Color.white);
             Button_Query.setBounds(170, 150, 150, 25);
             frame.add(Button_Query);
+            Button_Query.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    query();
+                    frame.dispose();
+                }
+            });
 
             JButton Button_MenuExit = new JButton("返回主菜单");
             Button_MenuExit.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.green));
@@ -83,12 +104,12 @@ public class CirculationManagement {
         }
     }
     public void lendBook(){
-
+        Lend_GUI lend_gui = new Lend_GUI();
     }
     public void returnBook(){
-
+        Return_GUI return_gui = new Return_GUI();
     }
     public void query(){
-
+        Query_GUI query_gui = new Query_GUI();
     }
 }

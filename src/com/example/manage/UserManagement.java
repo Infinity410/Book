@@ -123,7 +123,7 @@ public class UserManagement extends JFrame {
         for (Iterator<User> iterator = users.iterator(); iterator.hasNext(); ) {
             System.out.println(iterator.next());
         }
-        setOperator(operator1);
+        setOperator(operator);
     }
 
 
