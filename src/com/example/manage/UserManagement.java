@@ -266,6 +266,12 @@ public class UserManagement extends JFrame {
             Button_UserManage.setForeground(Color.white);
             Button_UserManage.setBounds(170, 50, 150, 25);
             frame.add(Button_UserManage);
+            Button_UserManage.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    manage_gui(usertype1);
+                }
+            });
 
             JButton Button_BookManage = new JButton("图书管理");
             Button_BookManage.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.green));
@@ -325,6 +331,9 @@ public class UserManagement extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public void manage_gui(int usertype_manage){
+
     }
     public void input(){
 
