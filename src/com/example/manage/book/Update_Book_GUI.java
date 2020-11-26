@@ -185,9 +185,28 @@ public class Update_Book_GUI {
                     books.get(i).setAuthor(newBookAuthor.getText());
                     int count_int = Integer.parseInt(newBookCount.getText());
                     books.get(i).setCount(count_int);
+                    BufferedWriter bw = null;
+                    try{
+                        bw = new BufferedWriter(new FileWriter(file));
+                        for (int j = 0; j<books.size();j++ ){
+                            bw.write(books.get(j).getNo()+"=>"+books.get(j).getName()+"=>"+books.get(j).getAuthor()+"=>"+books.get(j).getPress()+"=>"+books.get(j).getCount());
+                            bw.newLine();
+                            bw.flush();
+                        }
+                    }catch (IOException e1) {
+                        System.out.println("修改失败："+e1.getMessage());
+                    }finally{
+                        try {
+                            bw.close();
+                        } catch (IOException e1) {
+                            System.out.println("关闭BufferedWriter输出流异常："+e1.getMessage());
+                        }
+                    }
                     for (Iterator<Book> iterator = books.iterator(); iterator.hasNext(); ) {
                         System.out.println(iterator.next());
                     }
+                    JOptionPane.showMessageDialog(null, "修改成功", "修改成功", JOptionPane.NO_OPTION);
+                    fr.setVisible(false);
                 }
             });
 

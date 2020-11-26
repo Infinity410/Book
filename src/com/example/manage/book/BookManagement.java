@@ -174,18 +174,39 @@ public class BookManagement {
             Button_BookSearchNo.setForeground(Color.white);
             Button_BookSearchNo.setBounds(170, 50, 150, 25);
             frame.add(Button_BookSearchNo);
+            Button_BookSearchNo.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    queryByNo();
+                    frame.dispose();
+                }
+            });
 
             JButton Button_BookSearchName = new JButton("按书名查询");
             Button_BookSearchName.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.green));
             Button_BookSearchName.setForeground(Color.white);
             Button_BookSearchName.setBounds(170, 100, 150, 25);
             frame.add(Button_BookSearchName);
+            Button_BookSearchName.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    queryByName();
+                    frame.dispose();
+                }
+            });
 
             JButton Button_BookSearchAuthor = new JButton("按作者查询");
             Button_BookSearchAuthor.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.green));
             Button_BookSearchAuthor.setForeground(Color.white);
             Button_BookSearchAuthor.setBounds(170, 150, 150, 25);
             frame.add(Button_BookSearchAuthor);
+            Button_BookSearchAuthor.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    queryByAuthor();
+                    frame.dispose();
+                }
+            });
 
             JButton Button_SearchExit = new JButton("退出");
             Button_SearchExit.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.green));
@@ -210,13 +231,13 @@ public class BookManagement {
         }
     }
     public void queryByNo(){
-
+        QueryByNo_GUI queryByNo_gui = new QueryByNo_GUI();
     }
     public void queryByName(){
-
+        QueryByName_GUI queryByName_gui = new QueryByName_GUI();
     }
     public void queryByAuthor(){
-
+        QueryByAuthor_GUI queryByAuthor_gui = new QueryByAuthor_GUI();
     }
 
 }
