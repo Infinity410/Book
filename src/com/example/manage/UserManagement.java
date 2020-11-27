@@ -23,11 +23,13 @@ public class UserManagement extends JFrame {
     private String operator;
     private List<User> users;
     private static final File file = new File("User.txt");
+    private ImageIcon imageIcon=new ImageIcon("icon_book.png");
     private int usertype;
 
     public UserManagement() {
         //init();
         users = new ArrayList<>();
+
 //        JFrame frame = new JFrame("登录界面");
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        frame.pack();
@@ -136,6 +138,7 @@ public class UserManagement extends JFrame {
     }
 
     public void init() {
+
         UIManager.put("RootPane.setupButtonVisible", false);
         try {
             BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.generalNoTranslucencyShadow;
@@ -184,6 +187,7 @@ public class UserManagement extends JFrame {
             frame.setSize(500, 300);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setLocationRelativeTo(null);
+            frame.setIconImage(imageIcon.getImage());
             frame.setVisible(true);
 
 
@@ -241,6 +245,7 @@ public class UserManagement extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public String getOperator() {
