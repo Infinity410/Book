@@ -138,7 +138,7 @@ public class UserManagement extends JFrame {
     public void init() {
         UIManager.put("RootPane.setupButtonVisible", false);
         try {
-            BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.osLookAndFeelDecorated;
+            BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.generalNoTranslucencyShadow;
             org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
 
             JFrame frame = new JFrame("登录界面");
