@@ -17,12 +17,33 @@ public class CirculationManagement {
     private int userType;
     private String operator;
     private static final File file = new File("Circulation.txt");
-    public CirculationManagement(){
+    public CirculationManagement(int userType1,String op1){
         circulations = new ArrayList<>();
+        setOperator(op1);
+        setUserType(userType1);
     }
-    public void init(int userType1,String operator1){
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
+    }
+
+    public int getUserType() {
+        return userType;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
+    }
+
+    public void init(int userType1, String operator1){
         UIManager.put("RootPane.setupButtonVisible", false);
         System.out.println(operator1);
+        setUserType(userType1);
+        setOperator(operator1);
         try {
             BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.osLookAndFeelDecorated;
             org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
@@ -93,8 +114,8 @@ public class CirculationManagement {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     frame.dispose();
-                    UserManagement userManagement = new UserManagement(operator1);
-                    userManagement.menu(userType1);
+                    UserManagement userManagement = new UserManagement(userType1,operator1);
+                    userManagement.menu(userType1,operator1);
                 }
             });
 
@@ -104,12 +125,12 @@ public class CirculationManagement {
         }
     }
     public void lendBook(){
-        Lend_GUI lend_gui = new Lend_GUI();
+        Lend_GUI lend_gui = new Lend_GUI(userType,operator);
     }
     public void returnBook(){
-        Return_GUI return_gui = new Return_GUI();
+        Return_GUI return_gui = new Return_GUI(userType,operator);
     }
     public void query(){
-        Query_GUI query_gui = new Query_GUI();
+        Query_GUI query_gui = new Query_GUI(userType, operator);
     }
 }

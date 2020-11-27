@@ -18,9 +18,13 @@ import java.util.regex.Pattern;
 
 public class QueryByAuthor_GUI {
     private List<Book> books;
+    private String oper;
     private String bookname;
     private static final File file = new File("Book.txt");
-    public QueryByAuthor_GUI(){
+    private int usertype;
+    public QueryByAuthor_GUI(int u1,String op1){
+        usertype=u1;
+        oper=op1;
         init();
         books = new ArrayList<>();
         BufferedReader br = null;
@@ -135,6 +139,14 @@ public class QueryByAuthor_GUI {
             Button_Cancle.setForeground(Color.white);
             Button_Cancle.setBounds(320, 370, 70, 25);
             fr.add(Button_Cancle);
+            Button_Cancle.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    fr.dispose();
+                    BookManagement bookManagement = new BookManagement();
+                    bookManagement.init(usertype,oper);
+                }
+            });
 
             fr.setSize(610, 450);
             fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

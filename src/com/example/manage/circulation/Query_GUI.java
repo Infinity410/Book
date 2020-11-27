@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Query_GUI {
     private List<Circulation> circulations;
@@ -21,8 +23,12 @@ public class Query_GUI {
     private String[] columnName = new String[]{"流水号","用户名","书号","日期","借还书类型","操作人"};
     private String[][] columnBook;
     private String bookno;
-    public Query_GUI(){
+    private String operator;
+    private int usertype;
+    public Query_GUI(int usertype1,String operator1){
         circulations = new ArrayList<>();
+        setOperator(operator1);
+        setUsertype(usertype1);
         BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader(file));
@@ -55,6 +61,23 @@ public class Query_GUI {
         }
         init();
     }
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
+    }
+
+    public int getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(int usertype) {
+        this.usertype = usertype;
+    }
+
     public void init(){
         UIManager.put("RootPane.setupButtonVisible", false);
         try {
@@ -74,32 +97,40 @@ public class Query_GUI {
             newBookNo.setBounds(250, 20, 150, 25);
             fr.add(newBookNo);
 
-            JButton Button_Comfirm = new JButton("确定并返回");
-            Button_Comfirm.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.red));
+            JButton Button_Comfirm = new JButton("确定");
+            Button_Comfirm.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.green));
             Button_Comfirm.setForeground(Color.white);
-            Button_Comfirm.setBounds(220, 370, 140, 25);
+            Button_Comfirm.setBounds(220, 370, 70, 25);
             fr.add(Button_Comfirm);
-
             Button_Comfirm.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     boolean flag = false;
                     bookno = newBookNo.getText().toString();
                     int i;
+                    List<Circulation> results = new ArrayList<>();
+                    Pattern pattern = Pattern.compile(bookno, Pattern.CASE_INSENSITIVE);
                     for(i = 0; i < circulations.size(); i++){
-                        if(bookno.equals(circulations.get(i).getId())){
-                            System.out.println(circulations.get(i).getId());
-//                            JOptionPane.showMessageDialog(null, "查找成功", "查找成功", JOptionPane.NO_OPTION);
-//                            fr.setVisible(false);
+                        Matcher matcher = pattern.matcher((circulations.get(i)).getId());
+                        if(matcher.find()){
+                            results.add(circulations.get(i));
                             flag=true;
-                            break;
                         }
                     }
                     if(!flag){
                         JOptionPane.showMessageDialog(null, "没找到这个人", "没找到这个人", JOptionPane.WARNING_MESSAGE);
                         newBookNo.setText("");
                     }else{
-                        columnBook = new String[][]{{String.valueOf(circulations.get(i).getSerialNo())}};
+//                        columnBook = new String[][]{{String.valueOf(circulations.get(i).getSerialNo()),circulations.get(i).getId(),circulations.get(i).getNo(),circulations.get(i).getDatel(), String.valueOf(circulations.get(i).getType()),circulations.get(i).getOperator()}};
+                        columnBook = new String[results.size()][6];
+                        for (int a=0; a<results.size(); a++){
+                            columnBook[a][0]=String.valueOf(circulations.get(a).getSerialNo());
+                            columnBook[a][1]=circulations.get(a).getId();
+                            columnBook[a][2]=circulations.get(a).getNo();
+                            columnBook[a][3]=circulations.get(a).getDatel();
+                            columnBook[a][4]=String.valueOf(circulations.get(a).getType());
+                            columnBook[a][5]=circulations.get(a).getOperator();
+                        }
                         JTable table = new JTable(columnBook, columnName);
                         table.setUI(new BETableUI());
                         table.getColumnModel().getColumn(0).setPreferredWidth(40);
@@ -117,6 +148,20 @@ public class Query_GUI {
             fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             fr.setLocationRelativeTo(null);
             fr.setVisible(true);
+
+            JButton Button_Cancle = new JButton("取消");
+            Button_Cancle.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.lightBlue));
+            Button_Cancle.setForeground(Color.white);
+            Button_Cancle.setBounds(320, 370, 70, 25);
+            fr.add(Button_Cancle);
+            Button_Cancle.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    fr.dispose();
+                    CirculationManagement circulationManagement = new CirculationManagement(usertype,operator);
+                    circulationManagement.init(usertype,operator);
+                }
+            });
 
         }catch (Exception e) {
             e.printStackTrace();

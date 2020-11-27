@@ -14,6 +14,7 @@ import java.io.IOException;
 
 public class Add_Book_GUI {
     private int userType;
+    private String oper;
     private static final File file = new File("Book.txt");
     public Add_Book_GUI(int userType1){
         userType=userType1;
@@ -91,7 +92,7 @@ public class Add_Book_GUI {
                     JOptionPane.showMessageDialog(null, "添加成功", "添加成功", JOptionPane.NO_OPTION);
                     fr.dispose();
                     BookManagement bookManagement = new BookManagement();
-                    bookManagement.init(userType);
+                    bookManagement.init(userType,oper);
                 }
             });
 
@@ -100,6 +101,14 @@ public class Add_Book_GUI {
             Button_Cancle.setForeground(Color.white);
             Button_Cancle.setBounds(275, 300, 70, 25);
             fr.add(Button_Cancle);
+            Button_Cancle.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    fr.dispose();
+                    BookManagement bookManagement = new BookManagement();
+                    bookManagement.init(userType,oper);
+                }
+            });
 
             fr.setSize(500, 400);
             fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

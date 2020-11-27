@@ -86,7 +86,7 @@ public class UserManagement extends JFrame {
 
     }
 
-    public UserManagement(String operator1){
+    public UserManagement(int u1,String operator1){
         users = new ArrayList<>();
         BufferedReader br = null;
         try {
@@ -124,8 +124,16 @@ public class UserManagement extends JFrame {
             System.out.println(iterator.next());
         }
         setOperator(operator);
+        setUsertype(u1);
     }
 
+    public int getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(int usertype) {
+        this.usertype = usertype;
+    }
 
     public void init() {
         UIManager.put("RootPane.setupButtonVisible", false);
@@ -216,7 +224,7 @@ public class UserManagement extends JFrame {
                         //点击确定后会跳转到主窗口
                         frame.setVisible(false);
                         usertype = userDaoImlp.getType();
-                        menu(usertype);
+                        menu(usertype,operator);
                     }
                 }
             });
@@ -243,8 +251,9 @@ public class UserManagement extends JFrame {
         this.operator = operator;
     }
 
-    public void menu(int usertype1) {
+    public void menu(int usertype1,String op1) {
         UIManager.put("RootPane.setupButtonVisible", false);
+        setOperator(op1);
         try {
             BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.osLookAndFeelDecorated;
             org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
@@ -316,14 +325,14 @@ public class UserManagement extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     frame.dispose();
                     BookManagement bookManagement = new BookManagement();
-                    bookManagement.init(usertype1);
+                    bookManagement.init(usertype1,operator);
                 }
             });
             Button_BookLiuTongManage.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     frame.dispose();
-                    CirculationManagement circulationManagement = new CirculationManagement();
+                    CirculationManagement circulationManagement = new CirculationManagement(usertype1,operator);
                     circulationManagement.init(usertype1,operator);
                 }
             });

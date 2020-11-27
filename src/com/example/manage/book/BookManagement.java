@@ -15,6 +15,7 @@ import java.util.List;
 public class BookManagement {
     private List<Book> books;
     private int userType;
+    private String oper;
     private static final File file = new File("Book.txt");
     public BookManagement(){
         books = new ArrayList<>();
@@ -51,8 +52,18 @@ public class BookManagement {
             System.out.println(iterator.next());
         }
     }
-    public void init(int userType1){
+
+    public String getOper() {
+        return oper;
+    }
+
+    public void setOper(String oper) {
+        this.oper = oper;
+    }
+
+    public void init(int userType1,String op1){
         userType=userType1;
+        oper=op1;
         UIManager.put("RootPane.setupButtonVisible", false);
         try {
             BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.osLookAndFeelDecorated;
@@ -75,6 +86,11 @@ public class BookManagement {
             Button_Input.setForeground(Color.white);
             Button_Input.setBounds(170, 50, 150, 25);
             frame.add(Button_Input);
+            if(userType!=2){
+                Button_Input.setEnabled(false);
+            }else{
+                Button_Input.setEnabled(true);
+            }
 
             Button_Input.addActionListener(new ActionListener() {
                 @Override
@@ -89,6 +105,11 @@ public class BookManagement {
             Button_Update.setForeground(Color.white);
             Button_Update.setBounds(170, 100, 150, 25);
             frame.add(Button_Update);
+            if(userType!=2){
+                Button_Update.setEnabled(false);
+            }else{
+                Button_Update.setEnabled(true);
+            }
             Button_Update.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -102,6 +123,11 @@ public class BookManagement {
             Button_Delete.setForeground(Color.white);
             Button_Delete.setBounds(170, 150, 150, 25);
             frame.add(Button_Delete);
+            if(userType!=2){
+                Button_Delete.setEnabled(false);
+            }else{
+                Button_Delete.setEnabled(true);
+            }
             Button_Delete.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -139,7 +165,7 @@ public class BookManagement {
                 public void actionPerformed(ActionEvent e) {
                     frame.dispose();
                     UserManagement userManagement = new UserManagement();
-                    userManagement.menu(userType1);
+                    userManagement.menu(userType1,oper);
                 }
             });
 
@@ -148,14 +174,14 @@ public class BookManagement {
         }
     }
     public void update(){
-        Update_Book_GUI update_book_gui = new Update_Book_GUI();
+        Update_Book_GUI update_book_gui = new Update_Book_GUI(userType,getOper());
     }
     public void input(){
         Add_Book_GUI add_book_gui = new Add_Book_GUI(userType);
 
     }
     public void delete(){
-        Delete_Book_GUI delete_book_gui = new Delete_Book_GUI();
+        Delete_Book_GUI delete_book_gui = new Delete_Book_GUI(userType,getOper());
     }
     public void search() {
         UIManager.put("RootPane.setupButtonVisible", false);
@@ -217,7 +243,7 @@ public class BookManagement {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     frame.dispose();
-                    init(userType);
+                    init(userType,oper);
                 }
             });
 
@@ -231,13 +257,13 @@ public class BookManagement {
         }
     }
     public void queryByNo(){
-        QueryByNo_GUI queryByNo_gui = new QueryByNo_GUI();
+        QueryByNo_GUI queryByNo_gui = new QueryByNo_GUI(userType,getOper());
     }
     public void queryByName(){
-        QueryByName_GUI queryByName_gui = new QueryByName_GUI();
+        QueryByName_GUI queryByName_gui = new QueryByName_GUI(userType,getOper());
     }
     public void queryByAuthor(){
-        QueryByAuthor_GUI queryByAuthor_gui = new QueryByAuthor_GUI();
+        QueryByAuthor_GUI queryByAuthor_gui = new QueryByAuthor_GUI(userType,getOper());
     }
 
 }

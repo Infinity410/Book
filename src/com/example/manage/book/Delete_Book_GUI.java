@@ -14,9 +14,13 @@ import java.util.List;
 
 public class Delete_Book_GUI {
     private List<Book> books;
+    private String oper;
     private String bookno;
     private static final File file = new File("Book.txt");
-    public Delete_Book_GUI(){
+    private int usertype;
+    public Delete_Book_GUI(int u1,String oper1){
+        usertype = u1;
+        oper=oper1;
         init();
         books = new ArrayList<>();
         BufferedReader br = null;
@@ -84,6 +88,8 @@ public class Delete_Book_GUI {
                             System.out.println(books.get(i).getNo());
                             JOptionPane.showMessageDialog(null, "删除成功", "删除成功", JOptionPane.NO_OPTION);
                             fr.setVisible(false);
+                            BookManagement bookManagement = new BookManagement();
+                            bookManagement.init(usertype,oper);
                             flag=true;
                             break;
                         }
@@ -122,6 +128,14 @@ public class Delete_Book_GUI {
             Button_Cancle.setForeground(Color.white);
             Button_Cancle.setBounds(275, 100, 70, 25);
             fr.add(Button_Cancle);
+            Button_Cancle.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    fr.dispose();
+                    BookManagement bookManagement = new BookManagement();
+                    bookManagement.init(usertype,oper);
+                }
+            });
 
             fr.setSize(500, 200);
             fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

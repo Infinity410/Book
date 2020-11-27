@@ -17,8 +17,12 @@ import java.util.List;
 public class Update_Book_GUI {
     private List<Book> books;
     private String bookno;
+    private String oper;
     private static final File file = new File("Book.txt");
-    public Update_Book_GUI(){
+    private int usertype;
+    public Update_Book_GUI(int usertype1,String oper1){
+        usertype=usertype1;
+        oper=oper1;
         init();
         books = new ArrayList<>();
         BufferedReader br = null;
@@ -101,6 +105,14 @@ public class Update_Book_GUI {
             Button_Cancle.setForeground(Color.white);
             Button_Cancle.setBounds(275, 100, 70, 25);
             fr.add(Button_Cancle);
+            Button_Cancle.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    fr.dispose();
+                    BookManagement bookManagement = new BookManagement();
+                    bookManagement.init(usertype,oper);
+                }
+            });
 
             fr.setSize(500, 200);
             fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -207,6 +219,8 @@ public class Update_Book_GUI {
                     }
                     JOptionPane.showMessageDialog(null, "修改成功", "修改成功", JOptionPane.NO_OPTION);
                     fr.setVisible(false);
+                    BookManagement bookManagement = new BookManagement();
+                    bookManagement.init(usertype,oper);
                 }
             });
 
@@ -215,6 +229,14 @@ public class Update_Book_GUI {
             Button_Cancle.setForeground(Color.white);
             Button_Cancle.setBounds(275, 250, 70, 25);
             fr.add(Button_Cancle);
+            Button_Cancle.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    fr.dispose();
+                    BookManagement bookManagement = new BookManagement();
+                    bookManagement.init(usertype,oper);
+                }
+            });
 
             fr.setSize(700, 400);
             fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
