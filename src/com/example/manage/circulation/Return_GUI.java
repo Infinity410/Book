@@ -1,5 +1,6 @@
 package com.example.manage.circulation;
 
+import com.example.manage.book.Book;
 import org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper;
 import org.jb2011.lnf.beautyeye.ch3_button.BEButtonUI;
 
@@ -10,13 +11,16 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 public class Return_GUI {
     private List<Circulation> circulations;
     private String bookno;
+    private List<Book> books;
     private int usertype;
     private static final File file = new File("Circulation.txt");
+    private static final File file2 = new File("Book.txt");
     private String operator;
     public Return_GUI(int user1,String op1){
         init();
@@ -119,6 +123,41 @@ public class Return_GUI {
             Button_Comfirm.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+
+                    books = new ArrayList<>();
+                    BufferedReader br = null;
+                    try {
+                        br = new BufferedReader(new FileReader(file2));
+                        String str = null;
+                        //循环判断
+                        while ((str = br.readLine()) != null) {
+                            String[] data = str.split("=>");
+                            Book book1 = new Book();
+                            book1.setNo(data[0]);
+                            book1.setName(data[1]);
+                            book1.setAuthor(data[2]);
+                            book1.setPress(data[3]);
+                            int CountBook = Integer.parseInt(data[4]);
+                            book1.setCount(CountBook);
+                            books.add(book1);
+                            //System.out.println(user1);
+                        }
+
+                    } catch (FileNotFoundException e1) {
+                        System.out.println("文件读入异常：" + e1.getMessage());
+                    } catch (IOException e1) {
+                        System.out.println("文件读入异常：" + e1.getMessage());
+                    } finally {
+                        try {
+                            br.close();
+                        } catch (IOException e1) {
+                            System.out.println("关闭BufferedReader输入流异常：" + e1.getMessage());
+                        }
+                    }
+                    for (Iterator<Book> iterator = books.iterator(); iterator.hasNext(); ) {
+                        System.out.println(iterator.next());
+                    }
+
                     int num = circulations.size() + 1;
                     System.out.println(num);
                     Circulation circulation2 = new Circulation();
@@ -142,6 +181,31 @@ public class Return_GUI {
                                 bw.close();
                                 JOptionPane.showMessageDialog(null, "还书成功", "还书成功", JOptionPane.NO_OPTION);
                                 fr.dispose();
+                                for(int i=0;i<books.size();i++) {
+                                    if(bookno.equals(books.get(i).getNo())) {
+                                        books.get(i).setCount(books.get(i).getCount() + 1);
+                                    }
+                                }
+                                for (Iterator<Book> iterator = books.iterator(); iterator.hasNext(); ) {
+                                    System.out.println(iterator.next());
+                                }
+                                BufferedWriter bw2 = null;
+                                try{
+                                    bw2 = new BufferedWriter(new FileWriter(file2));
+                                    for (int j = 0; j<books.size();j++ ){
+                                        bw2.write(books.get(j).getNo()+"=>"+books.get(j).getName()+"=>"+books.get(j).getAuthor()+"=>"+books.get(j).getPress()+"=>"+books.get(j).getCount());
+                                        bw2.newLine();
+                                        bw2.flush();
+                                    }
+                                }catch (IOException e1) {
+                                    System.out.println("修改失败："+e1.getMessage());
+                                }finally{
+                                    try {
+                                        bw2.close();
+                                    } catch (IOException e1) {
+                                        System.out.println("关闭BufferedWriter输出流异常："+e1.getMessage());
+                                    }
+                                }
                                 CirculationManagement circulationManagement = new CirculationManagement(usertype,operator);
                                 circulationManagement.init(usertype,operator);
                             } catch (IOException e2) {

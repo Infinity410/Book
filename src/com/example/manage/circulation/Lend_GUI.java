@@ -162,8 +162,31 @@ public class Lend_GUI {
                     for(i = 0; i < books.size(); i++){
                         if(bookno.equals(books.get(i).getNo())){
                             System.out.println(books.get(i).getNo());
-                            JOptionPane.showMessageDialog(null, "借书成功", "借书成功", JOptionPane.NO_OPTION);
+                            if(books.get(i).getCount()!=0) {
+                                books.get(i).setCount(books.get(i).getCount() - 1);
+                                JOptionPane.showMessageDialog(null, "借书成功", "借书成功", JOptionPane.NO_OPTION);
+                            }
                             break;
+                        }
+                    }
+                    for (Iterator<Book> iterator = books.iterator(); iterator.hasNext(); ) {
+                        System.out.println(iterator.next());
+                    }
+                    BufferedWriter bw2 = null;
+                    try{
+                        bw2 = new BufferedWriter(new FileWriter(file2));
+                        for (int j = 0; j<books.size();j++ ){
+                            bw2.write(books.get(j).getNo()+"=>"+books.get(j).getName()+"=>"+books.get(j).getAuthor()+"=>"+books.get(j).getPress()+"=>"+books.get(j).getCount());
+                            bw2.newLine();
+                            bw2.flush();
+                        }
+                    }catch (IOException e1) {
+                        System.out.println("修改失败："+e1.getMessage());
+                    }finally{
+                        try {
+                            bw2.close();
+                        } catch (IOException e1) {
+                            System.out.println("关闭BufferedWriter输出流异常："+e1.getMessage());
                         }
                     }
                     if(i == books.size()){
